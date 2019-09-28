@@ -21,13 +21,10 @@ interface OptionsMixin {
 
 export interface TokenResponse {
     access_token: string;
-    token_type: string;
+    expires_in: number;
     scope: string;
-    user: {
-        id: string;
-        name: string;
-        email?: string;
-    };
+    token_type: string;
+    version: string;
 }
 
 export type Profile = OAuth2Profile<UserResponse>;

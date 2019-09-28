@@ -1,6 +1,6 @@
 {
     "name": "@oauth-everything/passport-patreon",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Patreon OAuth 2.0 strategy for Passport.js",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
