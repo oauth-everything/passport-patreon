@@ -80,7 +80,17 @@ export class Strategy<TUser = object, TInfo = object> extends OAuth2Strategy {
         this._oauth2.useAuthorizationHeaderforGET(true);
         this._oauth2.get("https://www.patreon.com/api/oauth2/v2/identity?fields[user]=" + this.fields.join(","), accessToken, (error, result) => {
 
-            if (error) return done(new InternalOAuthError("Failed to fetch user profile", error));
+            if (error) {
+                let errorStr;
+                try {
+                    const errors = JSON.parse(error.data);
+                    errorStr = '\n' + errors.errors.map((x: any) => `${x.code_name}: ${x.detail}`).join('\n  ');
+                }
+                catch (parseError) {
+                    errorStr = '';
+                }
+                return done(new InternalOAuthError(`Failed to fetch user profile${errorStr}`, error));
+            }
 
             let json: UserResponse;
 
